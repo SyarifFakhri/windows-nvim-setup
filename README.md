@@ -34,7 +34,9 @@ And then typing:
 if you don't get an error then all is good.
 
 6. Note, your tree should look like the following at this point:
+```
 └── nvim
     ├── autoload
     │   └── plug.vim
     └── init.vim
+```
