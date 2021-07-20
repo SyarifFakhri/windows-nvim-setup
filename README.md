@@ -1,10 +1,11 @@
 Windows Setup for nvim!
 
-Intro:
+# Intro
 
 Minimalist config for a vim setup :).
 
-Installation:
+# Installation
+
 Installation with windows is a little bit of a pain. Here's the general steps.
 
 1. Install nvim.
