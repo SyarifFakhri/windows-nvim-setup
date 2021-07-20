@@ -42,3 +42,11 @@ C:/users/user/AppData/Local/:
     │   └── plug.vim
     └── init.vim
 ```
+
+# Installing Plugins and first time install
+
+1. run:
+```
+:PlugInstall
+```
+While inside vim
