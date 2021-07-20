@@ -4,7 +4,7 @@
 # Except these
 !.gitignore
 !init.vim
-!readme.md
+!README.md
 
 # if the files to be tracked are in subdirs
 # !*/a/b/file1.txt
