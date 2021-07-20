@@ -50,3 +50,41 @@ C:/users/user/AppData/Local/:
 :PlugInstall
 ```
 While inside vim
+
+# Plugin specific install
+## Coc and Coc-clangd
+1. Coc-cland Needs nodejs as a dependency
+2. You need to run
+```
+:CocInstall coc-clangd
+```
+3. Or alternatively, just run:
+```
+:CocConfig
+```
+and paste:
+```
+"languageserver": {
+  "clangd": {
+    "command": "clangd",
+    "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+    "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+  }
+}
+```
+
+(Although do note, I actually haven't tried this method yet)
+
+4. Install clangd if you haven't:
+```
+:CocCommand clangd.install
+```
+
+5. coc-clangd requires a json compilation database (https://clang.llvm.org/docs/JSONCompilationDatabase.html)
+
+You can generate that in CMake by adding:
+```
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+```
+
+Note: Only works in cmake >= 2.8.5
