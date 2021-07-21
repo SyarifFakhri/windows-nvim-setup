@@ -86,5 +86,6 @@ You can generate that in CMake by adding:
 ```
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 ```
+Note: Only works in cmake >= 2.8.5 AND on unix makefile and ninja generators
 
-Note: Only works in cmake >= 2.8.5
+In order to get this in MSVC, you need to install Clang Power Tools (https://clangpowertools.com/blog/generate-json-compilation-database.html), and use it to export a compilation database.
