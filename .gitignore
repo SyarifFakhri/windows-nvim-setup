@@ -5,6 +5,7 @@
 !.gitignore
 !init.vim
 !README.md
+!coc-settings.json
 
 # if the files to be tracked are in subdirs
 # !*/a/b/file1.txt
