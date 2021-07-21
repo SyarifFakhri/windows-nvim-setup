@@ -20,6 +20,8 @@ call plug#end()
 
 "" General
 :set rnu
+:set tabstop=4
+:set shiftwidth=4
 
 " Highlight extra whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -41,6 +43,10 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "" COC
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "" Theming - Gruvbox
 autocmd vimenter * ++nested colorscheme gruvbox
