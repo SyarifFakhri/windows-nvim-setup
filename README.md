@@ -79,6 +79,7 @@ and paste:
 ```
 :CocCommand clangd.install
 ```
+Note: This has to be done in a cpp file.
 
 5. coc-clangd requires a json compilation database (https://clang.llvm.org/docs/JSONCompilationDatabase.html)
 
