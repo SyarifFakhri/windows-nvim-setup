@@ -81,6 +81,9 @@ and paste:
 ```
 Note: This has to be done in a cpp file.
 
+If this doesn't work, install clangd manually and add it to your path:
+https://github.com/llvm/llvm-project
+
 5. coc-clangd requires a json compilation database (https://clang.llvm.org/docs/JSONCompilationDatabase.html)
 
 You can generate that in CMake by adding:
