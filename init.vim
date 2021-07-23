@@ -11,6 +11,13 @@ Plug 'justinmk/vim-sneak'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+" FZF
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Gruvbox
 Plug 'morhetz/gruvbox'
 
 Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }
@@ -25,6 +32,14 @@ call plug#end()
 :set rnu
 :set tabstop=4
 :set shiftwidth=4
+:set smartcase
+
+" General settings but for COC
+set hidden
+set nobackup
+set nowritebackup
+set noswapfile
+set signcolumn=number
 
 " Highlight extra whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -39,7 +54,7 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 "" Telescope
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>p <cmd>Telescope find_files<cr>
 " nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
@@ -56,6 +71,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" Search the whole project for symbols
+nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr> 
+nnoremap <silent><nowait> <space>o :<C-u>CocCommand clangd.switchSourceHeader<cr> 
 
 "" Theming - Gruvbox
 autocmd vimenter * ++nested colorscheme gruvbox
