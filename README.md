@@ -52,6 +52,9 @@ C:/users/user/AppData/Local/:
 While inside vim
 
 # Plugin specific install
+## FZF
+Currently FZF needs to be installed ~/.fzf. 
+
 ## Coc and Coc-clangd
 1. Coc-cland Needs nodejs as a dependency
 2. You need to run

@@ -12,24 +12,22 @@ Plug 'justinmk/vim-sneak'
 " Plug 'nvim-telescope/telescope.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-" FZF
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" FZF 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 
 " Gruvbox
 Plug 'morhetz/gruvbox'
 
-Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"Vim fugitive
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
 "" General
-:set rnu
+:set nu rnu
 :set tabstop=4
 :set shiftwidth=4
 :set smartcase
@@ -39,7 +37,6 @@ set hidden
 set nobackup
 set nowritebackup
 set noswapfile
-set signcolumn=number
 
 " Highlight extra whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -60,10 +57,9 @@ let mapleader = " "
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 "" FZF
-" Needed on windows, or else it finds and tries to use it
-let $PATH = "C:\\Program Files\\Git\\usr\\bin;" . $PATH
-let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" Set the path of fzf
+set rtp+=~/.fzf 
+nmap <leader>p <cmd>FZF<cr>
 
 "" COC
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -72,8 +68,16 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Search the whole project for symbols
-nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr> 
+nnoremap <silent><nowait> <space>cs :<C-u>CocList -I symbols<cr> 
+nnoremap <silent><nowait> <space>cr :<C-u>CocResume<cr> 
 nnoremap <silent><nowait> <space>o :<C-u>CocCommand clangd.switchSourceHeader<cr> 
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+""Vim fugitive
+nmap <leader>gh :diffget //3<CR>
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gs :diffget :G<CR>
 
 "" Theming - Gruvbox
 autocmd vimenter * ++nested colorscheme gruvbox
