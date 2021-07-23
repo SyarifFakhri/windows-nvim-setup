@@ -7,11 +7,14 @@ Plug 'vim-airline/vim-airline'
 Plug 'justinmk/vim-sneak'
 
 " Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'morhetz/gruvbox'
+
+Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -36,10 +39,16 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 "" Telescope
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+"" FZF
+" Needed on windows, or else it finds and tries to use it
+let $PATH = "C:\\Program Files\\Git\\usr\\bin;" . $PATH
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 "" COC
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
