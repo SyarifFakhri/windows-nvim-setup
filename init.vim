@@ -102,6 +102,10 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 " FZF vim - prefer to use fzf since it works over ssh
 " None of these keybindings will work over ssh unfortunately. Not sure why
 :nmap <leader>fa :Rg<cr>
+" find selection
+nmap <leader>fp <cmd>GFiles<cr>
+vmap <leader>fv y:Rg <C-r>0<cr>
+
 let g:fzf_preview_window = ['up:80%', 'ctrl-/']
 
 "" COC
