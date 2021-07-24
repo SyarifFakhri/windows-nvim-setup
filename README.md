@@ -4,6 +4,13 @@ Windows Setup for nvim!
 
 Minimalist config for a vim setup :).
 
+# Dependencies
+1. You need to install Ripgrep and add it to your path
+
+# Known things that don't work over ssh
+1. fzf vim - ripgrep
+2. vim fugitive
+
 # Installation
 
 Installation with windows is a little bit of a pain. Here's the general steps.
@@ -55,30 +62,13 @@ While inside vim
 ## FZF
 Currently FZF needs to be installed ~/.fzf. 
 
+Vim should be able to find it automatically after that.
+
+If it still can't find the bin, navigate to the folder and run install.ps1 manually.
+
 ## Coc and Coc-clangd
 1. Coc-cland Needs nodejs as a dependency
-2. You need to run
-```
-:CocInstall coc-clangd
-```
-3. Or alternatively, just run:
-```
-:CocConfig
-```
-and paste:
-```
-"languageserver": {
-  "clangd": {
-    "command": "clangd",
-    "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-    "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-  }
-}
-```
-
-(Although do note, I actually haven't tried this method yet)
-
-4. Install clangd if you haven't:
+2. Install clangd if you haven't:
 ```
 :CocCommand clangd.install
 ```

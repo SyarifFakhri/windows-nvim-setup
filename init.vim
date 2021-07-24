@@ -14,6 +14,8 @@ Plug 'justinmk/vim-sneak'
 
 " FZF 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Doesn't work over ssh :( but still useful
+Plug 'junegunn/fzf.vim'
 
 " Gruvbox
 Plug 'morhetz/gruvbox'
@@ -30,23 +32,43 @@ Plug 'psliwka/vim-smoothie'
 " Nerdcommenter
 Plug 'preservim/nerdcommenter'
 
+" Highlighted yank
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 "" General
-" Remap leader key to space
+" General remaps
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+
+" Set search and replace as global by default instead of just the first
+" instance
+:set gdefault
 
 :set nu rnu
 :set tabstop=4
 :set shiftwidth=4
 :set ignorecase
 :set smartcase
-:set formatoptions-=cro " Prevent continuation of comments
+:set so=3 " Scroll ofset
+
+" Quickfix lists
+nmap <leader>lo :copen<cr>
+nmap <leader>lc :ccl<cr>
+nmap <leader>ln :cn<cr>
+nmap <leader>lp :cp<cr>
+
+" vimgrep - pretty slow
+" :nmap <leader>fa :vimgrep<space> // *<left><left><left>
 
 "General windows settings
-nnoremap <C-W>m <C-W>\| <C-W>_
-nnoremap <C-W>w <C-W>=
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+nnoremap <C-w><C-m> <C-w>\|<C-w>_
+nnoremap <C-w><C-w> <C-w>=
 
 " General settings but for COC
 set hidden
@@ -75,8 +97,19 @@ au BufWinLeave * call clearmatches()
 " Set the path of fzf
 set rtp+=~/.fzf 
 nmap <leader>p <cmd>FZF<cr>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+
+" FZF vim - prefer to use fzf since it works over ssh
+" None of these keybindings will work over ssh unfortunately. Not sure why
+:nmap <leader>fa :Rg<cr>
+let g:fzf_preview_window = ['up:80%', 'ctrl-/']
 
 "" COC
+let g:coc_global_extensions = [
+			\ 'coc-pairs',
+			\ 'coc-clangd',
+			\ ]
+	
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -84,24 +117,25 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Search the whole project for symbols
 nnoremap <silent><nowait> <leader>cs :<C-u>CocList -I symbols<cr> 
-nnoremap <silent><nowait> <leader>cr  :<C-u>CocListResume<CR>
-nnoremap <silent><nowait> <leader>cn  :<C-u>CocNext<CR>
-nnoremap <silent><nowait> <leader>cp  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <leader>cr :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <leader>cn :<C-u>CocNext<CR>
+nnoremap <silent><nowait> <leader>cp :<C-u>CocPrev<CR>
+xmap <leader>cf  <Plug>(coc-format-selected)
+nmap <leader>cf  <Plug>(coc-format-selected)
 
 nnoremap <silent><nowait> <leader>o :<C-u>CocCommand clangd.switchSourceHeader<cr> 
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
 nmap <silent><nowait> <leader>rn <Plug>(coc-rename)
-nmap <silent><nowait> <leader>qf <Plug>(coc-fix-current)
+nmap <silent><nowait> <leader>cf <Plug>(coc-fix-current)
 nnoremap <silent><nowait> <leader>ad :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>ao :<C-u>CocList outline<cr>
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 set cmdheight=2
 set updatetime=300
 
-""Vim fugitive
-let g:fugitive_git_executable = '"C:\\Program Files ^(x86^)\\Git\\cmd\\git.exe"'
-
+""Vim fugitive - Also doesn't work over ssh sadly
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
@@ -110,7 +144,8 @@ nmap <leader>gs :G<CR>
 autocmd vimenter * ++nested colorscheme gruvbox
 
 "" Vim-smoothie
-let g:smoothie_speed_linear_factor = 11
+let g:smoothie_speed_linear_factor = 12
+let g:smoothie_speed_constant_factor = 15
 
 "" Vim sneak
 let g:sneak#label = 1
@@ -121,3 +156,11 @@ let g:airline#extensions#tabline#enabled = 1
 
 "" Nerdcommenter
 filetype plugin on
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1 " Add space after comment
+
+nmap <leader>cc <plug>NERDCommenterToggle
+xmap <leader>cc <plug>NERDCommenterToggle
+
+"" Highlighted yank
+let g:highlightedyank_highlight_duration = 200
