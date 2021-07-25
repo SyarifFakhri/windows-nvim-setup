@@ -52,6 +52,10 @@ let mapleader = " "
 :set smartcase
 :set so=3 " Scroll ofset
 
+" Add [count]jk to the jumplist
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+
 " Quickfix lists
 nmap <leader>lo :copen<cr>
 nmap <leader>lc :ccl<cr>
