@@ -6,15 +6,8 @@ Plug 'vim-airline/vim-airline'
 "Sneak
 Plug 'justinmk/vim-sneak'
 
-" Telescope
-" Plug 'nvim-lua/popup.nvim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-fzy-native.nvim'
-
 " FZF 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Doesn't work over ssh :( but still useful
 Plug 'junegunn/fzf.vim'
 
 " Gruvbox
@@ -34,12 +27,20 @@ Plug 'preservim/nerdcommenter'
 
 " Highlighted yank
 Plug 'machakann/vim-highlightedyank'
+
+" Vim surround
+Plug 'tpope/vim-surround'
+
+" Python formatting # Also needs 'pip install neovim'
+Plug 'python/black'
+
 call plug#end()
 
 "" General
 " General remaps
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+nnoremap Y y$
 
 " Set search and replace as global by default instead of just the first
 " instance
@@ -74,6 +75,10 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-w><C-m> <C-w>\|<C-w>_
 nnoremap <C-w><C-w> <C-w>=
 
+" General buffer management 
+" close buffer / buffer delete
+nnoremap <leader>cb :bd<cr> 
+
 " General settings but for COC
 set hidden
 set nobackup
@@ -100,7 +105,11 @@ au BufWinLeave * call clearmatches()
 "" FZF
 " Set the path of fzf
 set rtp+=~/.fzf 
+" Go to file
 nmap <leader>p <cmd>FZF<cr>
+" Go to buffer
+nnoremap <leader>b :Buffers<CR>
+
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 
 " FZF vim - prefer to use fzf since it works over ssh
@@ -116,6 +125,7 @@ let g:fzf_preview_window = ['up:80%', 'ctrl-/']
 let g:coc_global_extensions = [
 			\ 'coc-pairs',
 			\ 'coc-clangd',
+			\ 'coc-jedi'
 			\ ]
 	
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -135,13 +145,13 @@ nnoremap <silent><nowait> <leader>o :<C-u>CocCommand clangd.switchSourceHeader<c
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
 nmap <silent><nowait> <leader>rn <Plug>(coc-rename)
-nmap <silent><nowait> <leader>cf <Plug>(coc-fix-current)
+nmap <silent><nowait> <leader>cq <Plug>(coc-fix-current)
 nnoremap <silent><nowait> <leader>ad :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>ao :<C-u>CocList outline<cr>
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 set cmdheight=2
-set updatetime=300
+set updatetime=5000
 
 ""Vim fugitive - Also doesn't work over ssh sadly
 nmap <leader>gh :diffget //3<CR>
@@ -172,3 +182,6 @@ xmap <leader>cc <plug>NERDCommenterToggle
 
 "" Highlighted yank
 let g:highlightedyank_highlight_duration = 200
+
+"" Python black
+autocmd BufWritePre *.py execute ':Black'
